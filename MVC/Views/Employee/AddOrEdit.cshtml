@@ -1,0 +1,36 @@
+﻿@model MVC.Models.mvcEmployeeModel
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+<br />
+<h2>AddOrEdit</h2>
+<br />
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.FirstName);*@
+            <label>Frist Name   :</label>
+            @Html.EditorFor(model => model.FirstName)
+            @*@Html.ValidationMessageFor(model => model.FirstName);*@
+        </div>
+        <div class="form-group">
+            <label>Middle Name :</label>
+            @Html.EditorFor(model => model.MiddleName)
+           
+        </div>
+        <div class="form-group">
+            <label>Last Name    :</label>
+            @Html.EditorFor(model => model.LastName)
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-info" value="Submit" />
+            <input type="reset" class="btn btn-success" value="Reset" />
+
+        </div>
+    }
+</div>
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MVC.Models.mvcEmployeeModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br /><br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Employee")" class="btn btn-info">Add New</a>
+   @* @Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table table-striped table-bordered">
+    
+    <thead class="table-heading" style="background-color:black; color:white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>Action Name</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            <a href="@Url.Action("AddOrEdit","Employee", new { id=item.Id})" class="btn btn-success">Update</a>
+           <a onclick="Delete(@item.Id)" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+}
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["successMessage"]'
+            if (successMessage != '') {
+                alertify.success(successMessage);
+            }
+        });
+        function Delete(id) {
+            alertify.confirm('Web Api CRUD Operations', 'Are You sure to Delete this Record ?', function () {
+                window.location.href = '@Url.Action("Delete","Employee")/' + id;
+            }, null)
+        }
+    </script>
+    }
